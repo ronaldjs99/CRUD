@@ -1,0 +1,87 @@
+<h1>CRUD Operation</h1>
+
+<h3>Company list</h3>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let company of companys">
+      <td>{{ company.id }}</td>
+      <td>{{ company.name }}</td>
+    </tr>
+    <tr>
+      <td>
+        <input [(ngModel)]="newCompany.name" placeholder="Company name" />
+      </td>
+      <td>
+        <button class="button-primary" (click)="createCompany()">
+          Add Company
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<br />
+<h3>Profiles list</h3>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>AGE</th>
+      <th>Company</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let profile of profiles">
+      <td>{{ profile.id }}</td>
+      <td>{{ profile.name }}</td>
+      <td>{{ profile.age }}</td>
+      <td>{{ profile.company }}</td>
+      <button class="button-secondary" (click)="editProfile(profile)">
+        Edit
+      </button>
+      <button class="button-danger" (click)="deleteProfile(profile.id)">
+        Delete
+      </button>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+<br />
+<h3>Add New Profile</h3>
+<form (ngSubmit)="saveProfile()">
+  <div>
+    <label for="name">NAME : </label>
+    <input type="text" name="name" [(ngModel)]="profile.name" required />
+  </div>
+
+  <div>
+    <label for="age">Age : </label>
+    <input type="text" name="age" [(ngModel)]="profile.age" required />
+  </div>
+
+  <div>
+    <label for="company">Company : </label>
+    <select type="text" name="company" [(ngModel)]="profile.company" required>
+      <option *ngFor="let company of companys" [ngValue]="company.id">
+        {{ company.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <button class="button-secondary" type="submit">
+      {{ editing ? "Update" : "Submit" }}
+    </button>
+    <button class="button-danger" type="button" (click)="createProfile()">
+      Cancle
+    </button>
+  </div>
+</form>
